@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IdleTimeoutService } from './idle-timeout.service';
+import { IdleTimeoutService } from './services/idle-timeout.service';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +16,10 @@ export class AppComponent {
   private idleSubscription?: Subscription;
 
   ngOnInit() {
-
-    // subscribe to `idleState` observable to get notifs about user's idle state changes
     this.idleSubscription = this.idleService.idleState.subscribe((isIdle) => {
       if (isIdle) {
         console.log('User is idle');
-        window.alert("User is inactive")
+        window.alert('User is inactive');
       } else {
         console.log('User is active');
       }
